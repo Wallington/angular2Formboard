@@ -1,0 +1,48 @@
+
+<md-toolbar class="mat-elevation-z2 primary">
+      <span>
+         Angular 2.0 Message Board 
+      </span>
+</md-toolbar>
+
+<div class="margin-20" [hidden]="profileSelectSection">
+      <md-toolbar class=" primary">
+            Select A Profile
+      </md-toolbar>
+      <md-card >
+            <md-grid-list cols="3" rows="3" rowHeight="200" gutterSize="20" class="">
+                  <md-grid-tile colspan="1" rowspan="1" *ngFor="let account of accounts">
+                        <a (click) = "AssignAccount(account)" class="profileButton mat-elevation-z2"><div class="profile">
+                              
+                              <img class="profileImg" src="{{account.avatar}}">
+                              <span class="profileName">{{account.name}}</span>
+                              <span class="profileRank">{{account.rank}}</span>
+                             
+                        </div></a>
+                  </md-grid-tile>
+
+                  
+                  
+            </md-grid-list>
+      </md-card>
+</div>
+<!-- checking user if they are real robots -->
+<div class="margin-20"  [hidden]="areYouBotSection">
+      <md-toolbar class=" primary">
+            <span>Are You Real Bot?</span>
+            <span class="flexSpacer"></span>
+            <button md-button (click)="ReturnProfileSelectSelection()">back</button>
+      </md-toolbar>
+      <md-card >
+            <img class="profileImg" src="{{SelectProfile.avatar}}">
+            <span class="profileName">{{SelectProfile.name}}</span>
+            <span class="profileRank">{{SelectProfile.rank}}</span>
+            <span class="flexSpacer"></span>
+            <form (ngSubmit)="SubmitGCaptcha()" #googleCapcha="ngForm">
+                  <div id="myG-Recaptcha" class="e2e-trusted-url" ></div>
+                  <br/>
+                  <button class="profile" type="submit" md-button value="Submit">Submit</button>
+            </form>
+            <span class="flexSpacer" ></span>
+      </md-card>
+</div>
