@@ -3,9 +3,16 @@ var router = express.Router();
 
 
 
-router.get('/auth', function(req,res,next)
+
+router.get('/auth/:respond', function(req,res,next)
 {
-    res.render('auth');
+    console.log(req.params);
+    
+});
+
+router.get('/', function(req, res, next)
+{
+    res.render('index');
 });
 
 module.exports = router;

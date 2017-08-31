@@ -1,10 +1,13 @@
+//loading in Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
-import { AppComponent } from "./auth/auth.component";
 import { HttpModule } from '@angular/http';
+//import { ReCaptchaModule } from 'angular2-recaptcha';
 import { FormsModule }   from '@angular/forms';
+import { appRouting } from './app.routing';
+import { MaterialModule } from '@angular/material';
 import 
 {
         MdAutocompleteModule,
@@ -40,19 +43,28 @@ import
         MdTooltipModule
 } from '@angular/material';
 
+
+//loading in Components
+import { mainComponent } from "./main/main.component";
+import { headerComponent } from "./header/header.component";
+import { authComponent } from './auth/auth.component';
     
-
-
-@NgModule({
-    declarations: [
-        AppComponent,
-        
+@NgModule
+({
+    
+    declarations: 
+    [
+        mainComponent,
+        authComponent,
+        headerComponent
     ],
     imports: 
     [
         BrowserModule,
         HttpModule,
         FormsModule,
+        appRouting,
+        MaterialModule,
         BrowserAnimationsModule,
         MdAutocompleteModule,
         MdButtonModule,
@@ -86,8 +98,9 @@ import
         MdToolbarModule,
         MdTooltipModule
     ],
-    exports: [
-    
+    exports: 
+    [
+    //RouterModule,
     MdAutocompleteModule,
     MdButtonModule,
     MdButtonToggleModule,
@@ -119,9 +132,17 @@ import
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
-  ],
-    bootstrap: [AppComponent]
+    ],
+    bootstrap: 
+    [
+        mainComponent
+    ],
+    entryComponents:
+    [
+        authComponent
+    ]
 })
-export class AppModule {
+export class AppModule 
+{
 
 }

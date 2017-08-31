@@ -15,26 +15,24 @@ import {
   transition
 } from '@angular/animations';
 
-import 
-{
-    DomSanitizer
-} from '@angular/platform-browser'
+//import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
-    styleUrls: ['../../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css', './auth.styles.css']
+    styleUrls: ['../../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css', './auth.styles.css', '../main/main.styles.css'],
+    
 
 })
 
 
 
-export class AppComponent
+export class authComponent
 {
 
     // Inject HttpClient into your component or service.
     // Inject the DomSanitizer from angularJS
-    constructor(private http: Http, private sanitizer: DomSanitizer){}
+    constructor(private http: Http, /*private router: Router*/){}
 
 
     //this hold the seleced account the user want log in as
@@ -161,17 +159,15 @@ export class AppComponent
     {
         let googleServerKey : String = '6LcNriwUAAAAANscAG0T05pInNp6Q3PMh1QLtnoe';
         let googleCaptchaResponse : String =  grecaptcha.getResponse(this.googleCaptcha));
-        let googleUrlResponseLocation : String = 'https://www.google.com/recaptcha/api/siteverify';
+        let googleUrlResponseLocation : URL = 'https://www.google.com/recaptcha/api/siteverify';
 
         this.http.post
         (
             googleUrlResponseLocation,
-            {
-                params: new HttpParams()
-                .set('secret', googleServerKey)
-                .append('response', googleCaptchaResponse);
-            }
-        ).subscribe(console.log('finish ' + data['success']  ))
+        {
+            'secret' : googleUrlResponseLocation,
+            'response': googleCaptchaResponse
+        }).subscribe(res => console.log(res.json()));
 
     }
 
