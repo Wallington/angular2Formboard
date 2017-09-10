@@ -33,6 +33,7 @@
             <span class="profileName">{{SelectProfile.name}}</span>
             <span class="profileRank">{{SelectProfile.rank}}</span>
             <span class="flexSpacer"></span>
+            <!--<div  (setVerified) = "setVerified($event)" googlerecaptcha [siteKey] = siteKey [theme] = theme ></div>-->
             <form (ngSubmit)="SubmitGCaptcha()" #googleCapcha="ngForm">
                   <div id="myG-Recaptcha" class="e2e-trusted-url" ></div>
                   <br/>

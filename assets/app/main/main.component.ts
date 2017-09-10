@@ -28,5 +28,8 @@ import
 
 export class mainComponent
 {
-  
+   Alert()
+   {
+     alert();
+   }
 }

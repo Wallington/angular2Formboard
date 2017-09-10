@@ -4,8 +4,7 @@ import
      Input 
 } from '@angular/core';
 
-import { Http } from '@angular/http';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import {
   trigger,
@@ -15,7 +14,7 @@ import {
   transition
 } from '@angular/animations';
 
-//import { Router } from '@angular/router';
+import { GoogleRecaptchaDirective } from 'angular2-google-recaptcha/directives/googlerecaptcha.directive';
 
 @Component({
     selector: 'app-auth',
@@ -32,7 +31,7 @@ export class authComponent
 
     // Inject HttpClient into your component or service.
     // Inject the DomSanitizer from angularJS
-    constructor(private http: Http, /*private router: Router*/){}
+    constructor( private http: HttpClient){}
 
 
     //this hold the seleced account the user want log in as
@@ -41,6 +40,10 @@ export class authComponent
     public profileSelectSection : Boolean = false;
     public areYouBotSection : Boolean = true;
 
+    public verified: any;
+    public siteKey : String = '6LcNriwUAAAAALTx_6B2nM69nZRYKfAPjZRv3lf8';
+    public theme: string = "light";
+    
     //keep the google Captcha from rerendering
     public botCaptchaRender : Boolean = false;
     
@@ -155,19 +158,24 @@ export class authComponent
         grecaptcha.reset();
     }
 
+    CreateProfile(vadiation)
+    {
+        if(vadiation.success)
+        {
+            this.http.head('/auth/session/create/' + JSON.stringify(this.SelectProfile)).subscribe();
+        }
+    }
+
+    
+
     SubmitGCaptcha ()
     {
-        let googleServerKey : String = '6LcNriwUAAAAANscAG0T05pInNp6Q3PMh1QLtnoe';
-        let googleCaptchaResponse : String =  grecaptcha.getResponse(this.googleCaptcha));
-        let googleUrlResponseLocation : URL = 'https://www.google.com/recaptcha/api/siteverify';
 
-        this.http.post
-        (
-            googleUrlResponseLocation,
-        {
-            'secret' : googleUrlResponseLocation,
-            'response': googleCaptchaResponse
-        }).subscribe(res => console.log(res.json()));
+        //requestinhg the response code that we need to valdate
+        let googleCaptchaResponse : String =  grecaptcha.getResponse(this.googleCaptcha);
+        
+        //send GET to get a JSON back from server after giving the response code to valdate
+        this.http.get('/auth/' + googleCaptchaResponse).subscribe(data => this.CreateProfile(data));
 
     }
 

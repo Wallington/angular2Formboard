@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http'
 //import { ReCaptchaModule } from 'angular2-recaptcha';
 import { FormsModule }   from '@angular/forms';
 import { appRouting } from './app.routing';
@@ -62,6 +63,7 @@ import { authComponent } from './auth/auth.component';
     [
         BrowserModule,
         HttpModule,
+        HttpClientModule,
         FormsModule,
         appRouting,
         MaterialModule,
@@ -144,5 +146,5 @@ import { authComponent } from './auth/auth.component';
 })
 export class AppModule 
 {
-
+    
 }
