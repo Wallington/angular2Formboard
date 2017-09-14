@@ -7,6 +7,7 @@ import
 
 //importing the pages we want load in our SPA
 import { authComponent } from './auth/auth.component';
+import { mainComponent } from './main/main.component';
 
 //define our SPA routes to what component want show to the user
 const appRoutes: Routes =
@@ -16,8 +17,12 @@ const appRoutes: Routes =
         component: authComponent
     },
     {
+        path: 'index',
+        component: mainComponent
+    },
+    {
         path: "",
-        redirectTo: '/auth',
+        redirectTo: '/',
         pathMatch: 'full'
     }
 ];

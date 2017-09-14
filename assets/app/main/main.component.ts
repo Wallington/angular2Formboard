@@ -5,19 +5,7 @@ import
   Input 
 } from '@angular/core';
 
-import { Http } from '@angular/http';
-import { HttpParams } from '@angular/common/http';
-
-import 
-{
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
-
-//import { Router } from '@angular/router';
+import { HttpParams, HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component
 ({
@@ -26,10 +14,16 @@ import
     styleUrls: ['../../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css', './main.styles.css']
 })
 
-export class mainComponent
+export class mainComponent implements OnInit
 {
-   Alert()
-   {
-     alert();
-   }
+    constructor
+    (
+      private http : HttpClient
+    ){}
+
+    ngOnInit()
+    {
+       let CheckSession;
+       //this.http.get('/auth/session/find/user').subscribe(data => console.log(data));
+    }
 }

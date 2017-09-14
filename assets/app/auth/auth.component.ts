@@ -14,7 +14,6 @@ import {
   transition
 } from '@angular/animations';
 
-import { GoogleRecaptchaDirective } from 'angular2-google-recaptcha/directives/googlerecaptcha.directive';
 
 @Component({
     selector: 'app-auth',
@@ -39,14 +38,11 @@ export class authComponent
 
     public profileSelectSection : Boolean = false;
     public areYouBotSection : Boolean = true;
-
-    public verified: any;
-    public siteKey : String = '6LcNriwUAAAAALTx_6B2nM69nZRYKfAPjZRv3lf8';
-    public theme: string = "light";
     
     //keep the google Captcha from rerendering
     public botCaptchaRender : Boolean = false;
     
+    //this will hold our google captcha data
     public googleCaptcha;
 
     //this 
@@ -63,14 +59,14 @@ export class authComponent
             "email":"wall.e@exapleprofile.com",
             "name":"Wall-E",
             "birthdate":"2008",
-            "avatar":"images\/profilePic_09.jpg",
+            "avatar":"images\/profilePic_09.png",
             "rank": "Member"
         },
         {
             "email":"clank@exampleprofile.com",
             "name":"Clank",
             "birthdate":"2002",
-            "avatar":"images\/profilePic_01.jpg",
+            "avatar":"images\/profilePic_01.png",
             "rank": "Moderator"
             
         },
@@ -78,7 +74,7 @@ export class authComponent
             "email":"cyerman@exampleprofile.com",
             "name":"Cyerman",
             "birthdate":"1966",
-            "avatar":"images\/profilePic_02.jpg",
+            "avatar":"images\/profilePic_02.png",
             "rank": "Member"
         },
         {
@@ -92,35 +88,35 @@ export class authComponent
             "email":"marvin@exampleprofile.com",
             "name":"Marvin",
             "birthdate":"1978",
-            "avatar":"images\/profilePic_04.jpg",
+            "avatar":"images\/profilePic_04.png",
             "rank": "Member"
         },
         {
             "email":"wheatley@exampleprofile.com",
             "name":"Wheatley",
             "birthdate":"2011",
-            "avatar":"images\/profilePic_05.jpg",
+            "avatar":"images\/profilePic_05.png",
             "rank": "Member"
         },
         {
             "email":"miles.monroe@exampleprofile.com",
             "name":"Miles Monroe",
             "birthdate":"1973",
-            "avatar":"images\/profilePic_06.jpg",
+            "avatar":"images\/profilePic_06.png",
             "rank": "Member"
         },
         {
             "email":"Maschinenmensch@exampleprofile.com",
             "name":"Maschinenmensch",
             "birthdate":"1927",
-            "avatar":"images\/profilePic_07.jpg",
+            "avatar":"images\/profilePic_07.png",
             "rank": "Member"
         },
         {
             "email":"optimus.prime@exampleprofile.com",
             "name":"Optimus Prime",
             "birthdate":"1984",
-            "avatar":"images\/profilePic_08.jpg",
+            "avatar":"images\/profilePic_08.png",
             "rank": "Moderator"
         }
     ];
@@ -158,15 +154,33 @@ export class authComponent
         grecaptcha.reset();
     }
 
+    ReplaceCharacter(string: String, targetCharacter : String, replaceCharacter : String)
+    {
+       
+        return string.replace(targetCharacter, replaceCharacter );
+        
+    }
+    Test ()
+    {
+        this.http.get('/auth/session/find/user/').subscribe(data => console.log(data));
+    }
+
     CreateProfile(vadiation)
     {
         if(vadiation.success)
         {
-            this.http.head('/auth/session/create/' + JSON.stringify(this.SelectProfile)).subscribe();
+            this.http.head('/auth/session/create/' + this.SelectProfile.email + '/' + this.SelectProfile.name + 
+            '/' + this.SelectProfile.birthdate + '/' + this.ReplaceCharacter(this.SelectProfile.avatar,'/','&47')
+            + '/' + this.SelectProfile.rank)
+            .subscribe();
+            
         }
+        else
+        {
+            this.ReturnProfileSelectSelection();
+        }
+              
     }
-
-    
 
     SubmitGCaptcha ()
     {
@@ -175,8 +189,8 @@ export class authComponent
         let googleCaptchaResponse : String =  grecaptcha.getResponse(this.googleCaptcha);
         
         //send GET to get a JSON back from server after giving the response code to valdate
-        this.http.get('/auth/' + googleCaptchaResponse).subscribe(data => this.CreateProfile(data));
-
+        this.http.get('/auth/valdate/' + googleCaptchaResponse).subscribe(data => this.CreateProfile(data));
+       
     }
 
 }

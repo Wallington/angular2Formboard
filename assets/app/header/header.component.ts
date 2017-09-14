@@ -1,11 +1,8 @@
 //import 
 import 
 {
-  Component,
-  ViewChild
-  Input 
+  Component
 } from '@angular/core';
-import {mainComponent} from '../main/main.component';
 
 import { HttpParams, HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 
@@ -20,17 +17,14 @@ export class headerComponent
 {
   constructor( private http: HttpClient){}
 
-  @ViewChild(mainComponent) main: mainComponent;
-
-  public Profile : Object = null;
-  public SessionActive : Boolean = false;
-
-  //call the server to see if there session and profile
-  FindSession()
+  public user = 
   {
-    this.http.get('/auth/session').subscribe(data => console.log(data));
+      name: 'Maschinenmensch',
+      avatar: 'images\/profilePic_07.png'
   }
-
+  
+  
+  
   
   
 }

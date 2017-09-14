@@ -4,7 +4,7 @@ var router = express.Router();
 var request = require('request');
 
 
-router.get('/auth/:gCaptcha', function(req,res,next)
+router.get('/auth/valdate/:gCaptcha', function(req,res,next)
 {
     //url set the values and codes for the valdating
     var url = 'https://www.google.com/recaptcha/api/siteverify?secret=6LcNriwUAAAAANscAG0T05pInNp6Q3PMh1QLtnoe&response=' + req.params.gCaptcha;  
@@ -23,24 +23,37 @@ router.get('/auth/:gCaptcha', function(req,res,next)
             }
 
             res.json(body);
+            res.end();
        }
    )
-  
+   
+});
+//create the session cookies
+router.head('/auth/session/create/:email/:name/:birthdate/:avatar/:rank', function( req, res, next)
+{
+    var object = 
+    {
+        email : req.params.email,
+        name : req.params.name,
+        birthdate: req.params.birthdate,
+        avatar: req.params.avatar,
+        rank: req.params.rank
+    } 
+    res.cookie('user', object , {expires: new Date(Date.now() + 3600000)});
+    res.cookie('session',true, {expires: new Date(Date.now() + 3600000)});
+    next();
 });
 
-router.head('/auth/session/create/:profile', function(req,res,next)
+//accessing the profile in the user cookie
+router.get('/auth/session/find/user/', function(req, res, next)
 {
-    console.log('create session');
-    //create a session Cookie
-    res.cookie('session',true,
-    { 
-        expires: new Date(Date.now() + 3600000 ) //3600000 = 1 hour if they dont update session  
-    });
-    //create a profile of the user to access their profile
-    res.cookie('user', req.param.profile, { 
-        expires: new Date(Date.now() + 3600000 ) //3600000 = 1 hour if they dont update session  
-    });
+    res.json(req.cookies.user);
+});
 
+//accessing the session in the session cookie
+router.get('/auth/session/find/session', function(err,req, res, next)
+{
+    
 });
 
 router.get('/', function(req, res, next)
