@@ -1,8 +1,13 @@
 import 
 {
      Component,
-     Input 
+     Input
 } from '@angular/core';
+
+import
+{
+    Router
+} from '@angular/router';
 
 import { HttpParams, HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 
@@ -14,6 +19,8 @@ import {
   transition
 } from '@angular/animations';
 
+//testing
+import {headerComponent} from '../header/header.component';
 
 @Component({
     selector: 'app-auth',
@@ -29,8 +36,8 @@ export class authComponent
 {
 
     // Inject HttpClient into your component or service.
-    // Inject the DomSanitizer from angularJS
-    constructor( private http: HttpClient){}
+    // Inject the header component for testing
+    constructor( private http: HttpClient, private router: Router){}
 
 
     //this hold the seleced account the user want log in as
@@ -121,8 +128,6 @@ export class authComponent
         }
     ];
 
-
-
     //we want render Google Captcha 
     RenderCaptcha()
     {
@@ -160,10 +165,7 @@ export class authComponent
         return string.replace(targetCharacter, replaceCharacter );
         
     }
-    Test ()
-    {
-        this.http.get('/auth/session/find/user/').subscribe(data => console.log(data));
-    }
+    
 
     CreateProfile(vadiation)
     {
@@ -173,7 +175,7 @@ export class authComponent
             '/' + this.SelectProfile.birthdate + '/' + this.ReplaceCharacter(this.SelectProfile.avatar,'/','&47')
             + '/' + this.SelectProfile.rank)
             .subscribe();
-            
+            this.router.navigate(['/threadBoard', 'Main<s>Board']);
         }
         else
         {

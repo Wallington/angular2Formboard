@@ -1,5 +1,5 @@
 //loading in Modules
-import { NgModule } from '@angular/core';
+import { NgModule,ChangeDetectorRef, NgZone } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
@@ -49,7 +49,8 @@ import
 import { mainComponent } from "./main/main.component";
 import { headerComponent } from "./header/header.component";
 import { authComponent } from './auth/auth.component';
-    
+import { threadBoardComponent } from './threadBoard/threadBoard.component';
+
 @NgModule
 ({
     
@@ -57,7 +58,8 @@ import { authComponent } from './auth/auth.component';
     [
         mainComponent,
         authComponent,
-        headerComponent
+        headerComponent,
+        threadBoardComponent
     ],
     imports: 
     [
@@ -141,10 +143,17 @@ import { authComponent } from './auth/auth.component';
     ],
     entryComponents:
     [
-        authComponent
+        authComponent,
+        headerComponent,
+        threadBoardComponent
+    ],
+    providers:
+    [
+        headerComponent,
+        threadBoardComponent
     ]
 })
 export class AppModule 
 {
-    
+
 }

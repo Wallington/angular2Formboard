@@ -8,7 +8,7 @@ import
 //importing the pages we want load in our SPA
 import { authComponent } from './auth/auth.component';
 import { mainComponent } from './main/main.component';
-
+import { threadBoardComponent } from './threadBoard/threadBoard.component';
 //define our SPA routes to what component want show to the user
 const appRoutes: Routes =
 [
@@ -19,6 +19,10 @@ const appRoutes: Routes =
     {
         path: 'index',
         component: mainComponent
+    },
+    {
+        path: 'threadBoard/:forumBoardName',
+        component: threadBoardComponent   
     },
     {
         path: "",

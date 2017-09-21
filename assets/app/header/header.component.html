@@ -3,7 +3,7 @@
          Angular 4.0 Message Board 
       </span>
       <span class="flexSpacer"></span>
-      <img id="avatar" src="{{user.avatar}}">
-      <span id="welcome">Welecome: {{user.name}}</span>
-      <button md-button class="danger">SIGN OUT</button>
+      <img id="avatar" [hidden]="!isSessionStarted"  src="{{user.avatar}}">
+      <span id="welcome" [hidden]="!isSessionStarted">{{user.name}}</span>
+      <button md-button  class="danger {{outputHide}}">SIGN OUT</button>
 </md-toolbar>

@@ -23,7 +23,6 @@ export class mainComponent implements OnInit
 
     ngOnInit()
     {
-       let CheckSession;
-       //this.http.get('/auth/session/find/user').subscribe(data => console.log(data));
+       
     }
 }
