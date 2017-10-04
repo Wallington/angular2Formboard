@@ -2,10 +2,12 @@
 import 
 {
   Component,
-  Input 
+  Input,
+  ApplicationRef
 } from '@angular/core';
 
-import { HttpParams, HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component
 ({
@@ -18,11 +20,12 @@ export class mainComponent implements OnInit
 {
     constructor
     (
-      private http : HttpClient
+      private http : HttpClient,
+      private AppRef: ApplicationRef
     ){}
 
-    ngOnInit()
+    RunUpdate()
     {
-       
+        this.AppRef.tick();
     }
 }

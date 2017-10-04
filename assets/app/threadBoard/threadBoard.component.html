@@ -1,14 +1,47 @@
 <md-toolbar class="small">
-        {{newThreadPostingInfo.forumBoardName}} > Topics 
+        {{ForumBoardName}} > Topics
 </md-toolbar>
 <div class="margin-20">
         <md-toolbar class=" primary">
                 Topics    
         </md-toolbar>
         <md-card>
-            <div class="margin-5">
+            <md-table #table [dataSource]="dataSource" mdSort >
+                <!-- thread Name -->
+                <ng-container mdColumnDef="name">
+                        <md-header-cell *mdHeaderCellDef md-sort-header> Topic Name </md-header-cell>
+                        <md-cell *mdCellDef="let row">{{row.name}}</md-cell>
+                </ng-container>
+
+                <!-- author who create this topic -->
+                <ng-container mdColumnDef="authorName">
+                        <md-header-cell *mdHeaderCellDef md-sort-header> Created By </md-header-cell>
+                        <md-cell *mdCellDef="let row">{{row.authorName}}%</md-cell>
+                </ng-container>
                 
-            </div>
-            <hr>
+                <!-- When this topic was created -->
+                <ng-container mdColumnDef="createdDate">
+                        <md-header-cell *mdHeaderCellDef md-sort-header> Created By </md-header-cell>
+                        <md-cell *mdCellDef="let row">{{row.createdDate}}</md-cell>
+                </ng-container>
+
+                <!-- Lastest Date when most recenent post on this topic -->
+                <ng-container mdColumnDef="recenentPostDate">
+                        <md-header-cell *mdHeaderCellDef md-sort-header> Lastest Post Date </md-header-cell>
+                        <md-cell *mdCellDef="let row" >{{row.recenentPostDate}}</md-cell>
+                </ng-container>
+                
+                <!-- number of post in this topic -->
+                <ng-container mdColumnDef="postCount">
+                        <md-header-cell *mdHeaderCellDef md-sort-header> Number of Posts </md-header-cell>
+                        <md-cell *mdCellDef="let row" >{{row.postCount}}</md-cell>
+                </ng-container>
+
+                <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+                <md-row *mdRowDef="let row; columns: displayedColumns;" (click)="SelectThread(row.name)"></md-row>
+
+            </md-table>
+            
+            
         </md-card>
 </div>

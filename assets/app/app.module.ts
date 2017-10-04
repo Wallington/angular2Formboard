@@ -50,6 +50,7 @@ import { mainComponent } from "./main/main.component";
 import { headerComponent } from "./header/header.component";
 import { authComponent } from './auth/auth.component';
 import { threadBoardComponent } from './threadBoard/threadBoard.component';
+import { postBoardComponent } from './postBoard/postBoard.component';
 
 @NgModule
 ({
@@ -59,7 +60,8 @@ import { threadBoardComponent } from './threadBoard/threadBoard.component';
         mainComponent,
         authComponent,
         headerComponent,
-        threadBoardComponent
+        threadBoardComponent,
+        postBoardComponent
     ],
     imports: 
     [
@@ -145,12 +147,14 @@ import { threadBoardComponent } from './threadBoard/threadBoard.component';
     [
         authComponent,
         headerComponent,
-        threadBoardComponent
+        threadBoardComponent,
+        postBoardComponent
     ],
     providers:
     [
         headerComponent,
-        threadBoardComponent
+        threadBoardComponent,
+        postBoardComponent
     ]
 })
 export class AppModule 

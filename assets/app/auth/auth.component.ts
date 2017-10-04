@@ -175,7 +175,7 @@ export class authComponent
             '/' + this.SelectProfile.birthdate + '/' + this.ReplaceCharacter(this.SelectProfile.avatar,'/','&47')
             + '/' + this.SelectProfile.rank)
             .subscribe();
-            this.router.navigate(['/threadBoard', 'Main<s>Board']);
+            this.router.navigate(['/threadBoard', 'Main Board']);
         }
         else
         {

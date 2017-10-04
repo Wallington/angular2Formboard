@@ -7,3 +7,11 @@
 {
     font-size: 15px;
 }
+
+
+.threadItem
+{
+    font-size: 20px;
+    cursor: pointer;
+    margin: 5px;
+}

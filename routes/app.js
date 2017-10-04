@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 //var reCaptcha = require('recaptcha2');
 var request = require('request');
-
+var mongoose = require('mongoose');
+// want call a model to which use to get and put data into mongodb aka database
+var Thread = require('../models/thread');
 
 router.get('/auth/valdate/:gCaptcha', function(req,res,next)
 {
@@ -51,10 +53,49 @@ router.get('/auth/session/find/user/', function(req, res, next)
 });
 
 //accessing the session in the session cookie
-router.get('/auth/session/find/session', function(err,req, res, next)
+router.get('/auth/session/find/session/', function(req, res, next)
 {
-    
+    res.json(req.cookies.session);
 });
+
+//access database for threads
+router.get('/thread/get/:forumBoardName', function(req, res, next)
+{
+    res.json
+    (
+        {
+            "fourmName" : "Main Board",
+            'threads': 
+            [
+                {
+                    "name": "Test 1: New Hope",
+                    "authorName": "Sean O'Brien",
+                    "createdDate": "September 25, 2017",
+                    "recenentPostDate": "September 27, 2017",
+                    "postCount": '3'
+                },
+                {
+                    "name": "Test 2: Empire Strike Back",
+                    "authorName": "Sean O'Brien",
+                    "createdDate": "September 02, 2017",
+                    "recenentPostDate": "September 16, 2017",
+                    "postCount": '31'
+                },
+                {
+                    
+                    "name": "Test 3: Return the Jedi",
+                    "authorName": "Sean O'Brien",
+                    "createdDate": "September 10, 2017",
+                    "recenentPostDate": "September 22, 2017",
+                    "postCount": '1'
+                }
+            ]
+        }
+    );
+
+
+});
+
 
 router.get('/', function(req, res, next)
 {

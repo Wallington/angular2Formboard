@@ -5,10 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var appRoutes = require('./routes/app');
-
+var mongoose = require('mongoose');
 
 var app = express();
-
+//calling mongoose to connect to mongodb
+mongoose.connect('localhost:27017/Angular2FormBoard');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
