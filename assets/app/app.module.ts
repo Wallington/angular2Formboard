@@ -51,6 +51,7 @@ import { headerComponent } from "./header/header.component";
 import { authComponent } from './auth/auth.component';
 import { threadBoardComponent } from './threadBoard/threadBoard.component';
 import { postBoardComponent } from './postBoard/postBoard.component';
+import { dbComponent } from './db/db.component';
 
 @NgModule
 ({
@@ -61,7 +62,8 @@ import { postBoardComponent } from './postBoard/postBoard.component';
         authComponent,
         headerComponent,
         threadBoardComponent,
-        postBoardComponent
+        postBoardComponent,
+        dbComponent
     ],
     imports: 
     [
@@ -148,13 +150,15 @@ import { postBoardComponent } from './postBoard/postBoard.component';
         authComponent,
         headerComponent,
         threadBoardComponent,
-        postBoardComponent
+        postBoardComponent,
+        dbComponent
     ],
     providers:
     [
         headerComponent,
         threadBoardComponent,
-        postBoardComponent
+        postBoardComponent,
+        dbComponent
     ]
 })
 export class AppModule 

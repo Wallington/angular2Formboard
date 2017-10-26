@@ -74,6 +74,11 @@ export class threadBoardComponent implements OnInit
     {
         this.router.navigate(['/postBoard', this.ForumBoardName, name],{ preserveFragment: true });
     }
+
+    OpenNewTopicModel()
+    {
+        
+    }
 }
 
 export interface Thread
@@ -108,12 +113,12 @@ export class ThreadDataBase
         {
            this.http.get('/thread/get/' + params['forumBoardName']).subscribe(jsonData =>
             {
-                
-                for(let i = 0; i < jsonData['threads'].length; i++)
+                let jsonDataCount = Object.keys(jsonData).length
+                for(let i = 0; i < jsonDataCount; i++)
                 {
                     //console.log(jsonData['threads'][i]);
                     const copiedData = this.data.slice();
-                    copiedData.push(this.CreateNewThread(jsonData['threads'][i]));
+                    copiedData.push(this.CreateNewThread(jsonData[i]));
                     this.dataChange.next(copiedData);
                 }
                 

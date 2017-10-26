@@ -9,7 +9,12 @@ var mongoose = require('mongoose');
 
 var app = express();
 //calling mongoose to connect to mongodb
-mongoose.connect('localhost:27017/Angular2FormBoard');
+if(!mongoose.connect('localhost:27017/Angular2FormBoard'))
+{
+    console.log('ERROR!');
+}
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

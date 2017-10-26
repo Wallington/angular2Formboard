@@ -1,16 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+ 
 
 var schema = new Schema
 ({
-    fourmName : 
+    f_id: 
+    {
+        type: String          
+    },
+    name : 
     {
         type: String,
         required: true,
-    },
-    threadName : 
-    {
-        type: String
     },
     authorName:
     {
@@ -19,16 +20,19 @@ var schema = new Schema
     createdDate:
     {
         type: String
-
     },
     recenentPostDate:
     {
         type: String
     },
-    postCount:
+    message:
     {
-        type: Number
+        type: String
+    },
+    beenRemove:
+    {
+        type: Boolean,
+        default: false
     }
 });
-
 module.exports = mongoose.model('Thread',schema);

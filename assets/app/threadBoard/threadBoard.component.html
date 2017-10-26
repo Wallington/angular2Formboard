@@ -3,7 +3,9 @@
 </md-toolbar>
 <div class="margin-20">
         <md-toolbar class=" primary">
-                Topics    
+                Topics
+                <span class="flexSpacer"></span>
+                <button md-button (click)="OpenNewTopicModel()">Create Topic</button>
         </md-toolbar>
         <md-card>
             <md-table #table [dataSource]="dataSource" mdSort >
@@ -44,4 +46,8 @@
             
             
         </md-card>
+        <md-toolbar class=" primary topMargin-20">
+                <span class="flexSpacer"></span>
+                <button md-button (click)="OpenNewTopicModel()">Create Topic</button>
+        </md-toolbar>
 </div>
